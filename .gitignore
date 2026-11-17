@@ -1,0 +1,11 @@
+# Installed packages (re-created with npm install)
+node_modules/
+
+# Logs and local environment files
+npm-debug.log*
+.env
+
+# Video files are uploaded to Google Drive, not GitHub
+*.mp4
+*.mov
+*.mkv
