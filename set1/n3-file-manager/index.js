@@ -183,6 +183,13 @@ if (args.length < 1) {
 
 const command = args[0].toLowerCase();
 
+// Only allow a plain file name, so every file stays inside the "files" folder.
+// path.basename() removes folders, so "../index.js" becomes "index.js" (not the same).
+if (args[1] && path.basename(args[1]) !== args[1]) {
+  console.log('Error: Please type a file name only, not a folder path.');
+  process.exit(1);
+}
+
 // Ensure files directory exists before any operation
 ensureFilesDir();
 
