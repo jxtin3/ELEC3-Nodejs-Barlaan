@@ -35,7 +35,8 @@ if (args.length < 1) {
 }
 
 const operation = args[0].toLowerCase(); // Get operation name
-const numbers = args.slice(1).map(arg => parseFloat(arg)); // Convert remaining args to numbers
+// Number() rejects text like "12abc" (parseFloat would read it as 12)
+const numbers = args.slice(1).map(arg => (arg.trim() === '' ? NaN : Number(arg)));
 
 // Validate that all arguments are valid numbers
 const hasInvalidNumber = numbers.some(num => isNaN(num));
@@ -49,32 +50,32 @@ let result;
 
 switch (operation) {
   case 'add':
-    if (numbers.length < 2) {
-      console.log('Error: add requires at least 2 numbers');
+    if (numbers.length !== 2) {
+      console.log('Error: add requires exactly 2 numbers');
       process.exit(1);
     }
     result = operations.add(numbers[0], numbers[1]);
     break;
 
   case 'subtract':
-    if (numbers.length < 2) {
-      console.log('Error: subtract requires at least 2 numbers');
+    if (numbers.length !== 2) {
+      console.log('Error: subtract requires exactly 2 numbers');
       process.exit(1);
     }
     result = operations.subtract(numbers[0], numbers[1]);
     break;
 
   case 'multiply':
-    if (numbers.length < 2) {
-      console.log('Error: multiply requires at least 2 numbers');
+    if (numbers.length !== 2) {
+      console.log('Error: multiply requires exactly 2 numbers');
       process.exit(1);
     }
     result = operations.multiply(numbers[0], numbers[1]);
     break;
 
   case 'divide':
-    if (numbers.length < 2) {
-      console.log('Error: divide requires at least 2 numbers');
+    if (numbers.length !== 2) {
+      console.log('Error: divide requires exactly 2 numbers');
       process.exit(1);
     }
     result = operations.divide(numbers[0], numbers[1]);
